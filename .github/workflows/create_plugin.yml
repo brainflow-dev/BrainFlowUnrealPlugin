@@ -1,0 +1,113 @@
+name: Package Unreal Engine Module
+
+on: [push]
+
+jobs:
+  WindowsModule:
+    runs-on: windows-2019
+
+    strategy:
+      fail-fast: false
+      max-parallel: 2
+      matrix:
+        arch: [Win32, x64]
+
+    steps:
+    - name: Clone Repository
+      uses: actions/checkout@v2
+    - name: Install BrainFlow submodule
+      run: |
+        git submodule update --init brainflow
+    - name: Add msbuild to PATH
+      uses: microsoft/setup-msbuild@v1.0.2
+    # compile and prepare everything
+    - name: Compile Release libs for ${{ matrix.arch }} with MSVC runtime dynamic
+      run: |
+        mkdir %GITHUB_WORKSPACE%\brainflow\%ARCH%
+        cd %GITHUB_WORKSPACE%\brainflow\%ARCH%
+        cmake -DWARNINGS_AS_ERRORS=ON -G "Visual Studio 16 2019" -A %ARCH% -DCMAKE_SYSTEM_VERSION=8.1 -DMSVC_RUNTIME=dynamic -DCMAKE_INSTALL_PREFIX=..\installed\%ARCH%\ ..
+        cmake --build . --target install --config Release -j 2 --parallel 2
+      shell: cmd
+      env:
+        ARCH: ${{ matrix.arch }}
+    # copy to the correct path
+    - name: Copy Compiled libs for ${{ matrix.arch }}
+      run: |
+        Copy-Item "$env:GITHUB_WORKSPACE\brainflow\installed\$env:ARCH\lib\*" -Destination "$env:GITHUB_WORKSPACE\BrainFlowUnrealModule\$env:ARCH" -Recurse -Force -Filter *.*
+        Copy-Item "$env:GITHUB_WORKSPACE\brainflow\installed\$env:ARCH\inc\*" -Destination "$env:GITHUB_WORKSPACE\BrainFlowUnrealModule\include" -Recurse -Force -Filter *.*
+      env:
+        ARCH: ${{ matrix.arch }}
+    # Start Deploy Stage
+    - name: Upload Unreal Engine Module
+      uses: actions/upload-artifact@v1
+      with:
+        name: BrainFlowUnrealEngineModule-${{ matrix.arch }}
+        path: BrainFlowUnrealModule
+
+  MacOSModule:
+    runs-on: macos-10.15
+
+    steps:
+    - name: Clone Repository
+      uses: actions/checkout@v2
+    - name: Install BrainFlow submodule
+      run: |
+        git submodule update --init brainflow
+    - name: Setup Cmake
+      uses: jwlawson/actions-setup-cmake@v1.4
+      with:
+        cmake-version: '3.16.x'
+    # compile everything
+    - name: Compile BrainFlow
+      run: |
+        mkdir $GITHUB_WORKSPACE/brainflow/build
+        cd $GITHUB_WORKSPACE/brainflow/build
+        cmake -DWARNINGS_AS_ERRORS=ON -DCMAKE_INSTALL_PREFIX=$GITHUB_WORKSPACE/installed -DCMAKE_BUILD_TYPE=Release ..
+        make -j
+        make install
+    # copy files
+    - name: Copy Libs
+      run: |
+        mkdir $GITHUB_WORKSPACE/BrainFlowUnrealModule/include
+        mkdir $GITHUB_WORKSPACE/BrainFlowUnrealModule/macos
+        cp $GITHUB_WORKSPACE/installed/inc/* $GITHUB_WORKSPACE/BrainFlowUnrealModule/include/
+        cp $GITHUB_WORKSPACE/installed/lib/*.* $GITHUB_WORKSPACE/BrainFlowUnrealModule/macos/
+    - name: Upload Unreal Engine Module
+      uses: actions/upload-artifact@v1
+      with:
+        name: BrainFlowUnrealModule-macos
+        path: BrainFlowUnrealModule
+
+  LinuxModule:
+    runs-on: ubuntu-18.04
+
+    steps:
+    - name: Clone Repository
+      uses: actions/checkout@v2
+    - name: Install BrainFlow submodule
+      run: |
+        git submodule update --init brainflow
+    - name: Setup Cmake
+      uses: jwlawson/actions-setup-cmake@v1.4
+      with:
+        cmake-version: '3.16.x'
+    # compile everything
+    - name: Compile BrainFlow
+      run: |
+        mkdir $GITHUB_WORKSPACE/brainflow/build
+        cd $GITHUB_WORKSPACE/brainflow/build
+        cmake -DWARNINGS_AS_ERRORS=ON -DCMAKE_INSTALL_PREFIX=$GITHUB_WORKSPACE/installed -DCMAKE_BUILD_TYPE=Release ..
+        make -j
+        make install
+    # copy files
+    - name: Copy Libs
+      run: |
+        mkdir $GITHUB_WORKSPACE/BrainFlowUnrealModule/include
+        mkdir $GITHUB_WORKSPACE/BrainFlowUnrealModule/linux
+        cp $GITHUB_WORKSPACE/installed/inc/* $GITHUB_WORKSPACE/BrainFlowUnrealModule/include/
+        cp $GITHUB_WORKSPACE/installed/lib/*.* $GITHUB_WORKSPACE/BrainFlowUnrealModule/linux/
+    - name: Upload Unreal Engine Module
+      uses: actions/upload-artifact@v1
+      with:
+        name: BrainFlowUnrealModule-linux
+        path: BrainFlowUnrealModule
