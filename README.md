@@ -20,7 +20,7 @@ By default it links MSVC runtime statically, while Unreal Engine uses dynamic li
 **Usage:**
 
 * Add `#include "BrainFlowPlugin.h"`, it includes headers for all BrainFlow modules.
-* Use BrainFlow C++ API as in any other project. Feel free tp check [Docs](https://brainflow.readthedocs.io/en/stable/UserAPI.html#c-api-reference) and [Samples](https://brainflow.readthedocs.io/en/stable/Examples.html#id1) 
+* Use BrainFlow C++ API as in any other project. Feel free to check [Docs](https://brainflow.readthedocs.io/en/stable/UserAPI.html#c-api-reference) and [Samples](https://brainflow.readthedocs.io/en/stable/Examples.html#id1) 
 
 
 It may also work on Linux and MacOS, but we have not tested it so far. Also, for Windows we provide libs only for x86 and x64. ARM is not currently supported.
