@@ -55,6 +55,16 @@ set_target_properties(brainflow::GanglionLib PROPERTIES
 list(APPEND _IMPORT_CHECK_TARGETS brainflow::GanglionLib )
 list(APPEND _IMPORT_CHECK_FILES_FOR_brainflow::GanglionLib "${_IMPORT_PREFIX}/lib/libGanglionLib.dylib" )
 
+# Import target "brainflow::BrainBitLib" for configuration "Debug"
+set_property(TARGET brainflow::BrainBitLib APPEND PROPERTY IMPORTED_CONFIGURATIONS DEBUG)
+set_target_properties(brainflow::BrainBitLib PROPERTIES
+  IMPORTED_LOCATION_DEBUG "${_IMPORT_PREFIX}/lib/libBrainBitLib.dylib"
+  IMPORTED_SONAME_DEBUG "@rpath/libBrainBitLib.dylib"
+  )
+
+list(APPEND _IMPORT_CHECK_TARGETS brainflow::BrainBitLib )
+list(APPEND _IMPORT_CHECK_FILES_FOR_brainflow::BrainBitLib "${_IMPORT_PREFIX}/lib/libBrainBitLib.dylib" )
+
 # Import target "brainflow::MLModule" for configuration "Debug"
 set_property(TARGET brainflow::MLModule APPEND PROPERTY IMPORTED_CONFIGURATIONS DEBUG)
 set_target_properties(brainflow::MLModule PROPERTIES

@@ -55,6 +55,16 @@ set_target_properties(brainflow::GanglionLib32 PROPERTIES
 list(APPEND _IMPORT_CHECK_TARGETS brainflow::GanglionLib32 )
 list(APPEND _IMPORT_CHECK_FILES_FOR_brainflow::GanglionLib32 "${_IMPORT_PREFIX}/lib/GanglionLib32.lib" "${_IMPORT_PREFIX}/lib/GanglionLib32.dll" )
 
+# Import target "brainflow::BrainBitLib32" for configuration "Release"
+set_property(TARGET brainflow::BrainBitLib32 APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
+set_target_properties(brainflow::BrainBitLib32 PROPERTIES
+  IMPORTED_IMPLIB_RELEASE "${_IMPORT_PREFIX}/lib/BrainBitLib32.lib"
+  IMPORTED_LOCATION_RELEASE "${_IMPORT_PREFIX}/lib/BrainBitLib32.dll"
+  )
+
+list(APPEND _IMPORT_CHECK_TARGETS brainflow::BrainBitLib32 )
+list(APPEND _IMPORT_CHECK_FILES_FOR_brainflow::BrainBitLib32 "${_IMPORT_PREFIX}/lib/BrainBitLib32.lib" "${_IMPORT_PREFIX}/lib/BrainBitLib32.dll" )
+
 # Import target "brainflow::MLModule32" for configuration "Release"
 set_property(TARGET brainflow::MLModule32 APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
 set_target_properties(brainflow::MLModule32 PROPERTIES

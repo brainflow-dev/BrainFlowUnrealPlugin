@@ -4,7 +4,7 @@ if("${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION}" LESS 2.5)
    message(FATAL_ERROR "CMake >= 2.6.0 required")
 endif()
 cmake_policy(PUSH)
-cmake_policy(VERSION 2.6...3.17)
+cmake_policy(VERSION 2.6...3.18)
 #----------------------------------------------------------------
 # Generated CMake target import file.
 #----------------------------------------------------------------
@@ -16,7 +16,7 @@ set(CMAKE_IMPORT_FILE_VERSION 1)
 set(_targetsDefined)
 set(_targetsNotDefined)
 set(_expectedTargets)
-foreach(_expectedTarget brainflow::BoardController32 brainflow::DataHandler32 brainflow::DSPFilters brainflow::WaveLib brainflow::GanglionLib32 brainflow::MLModule32 brainflow::Brainflow32)
+foreach(_expectedTarget brainflow::BoardController32 brainflow::DataHandler32 brainflow::DSPFilters brainflow::WaveLib brainflow::GanglionLib32 brainflow::BrainBitLib32 brainflow::MLModule32 brainflow::Brainflow32)
   list(APPEND _expectedTargets ${_expectedTarget})
   if(NOT TARGET ${_expectedTarget})
     list(APPEND _targetsNotDefined ${_expectedTarget})
@@ -82,6 +82,13 @@ set_target_properties(brainflow::WaveLib PROPERTIES
 add_library(brainflow::GanglionLib32 SHARED IMPORTED)
 
 set_target_properties(brainflow::GanglionLib32 PROPERTIES
+  INTERFACE_INCLUDE_DIRECTORIES "${_IMPORT_PREFIX}/inc"
+)
+
+# Create imported target brainflow::BrainBitLib32
+add_library(brainflow::BrainBitLib32 SHARED IMPORTED)
+
+set_target_properties(brainflow::BrainBitLib32 PROPERTIES
   INTERFACE_INCLUDE_DIRECTORIES "${_IMPORT_PREFIX}/inc"
 )
 

@@ -16,7 +16,7 @@ set(CMAKE_IMPORT_FILE_VERSION 1)
 set(_targetsDefined)
 set(_targetsNotDefined)
 set(_expectedTargets)
-foreach(_expectedTarget brainflow::BoardController brainflow::DataHandler brainflow::DSPFilters brainflow::WaveLib brainflow::GanglionLib brainflow::MLModule brainflow::Brainflow)
+foreach(_expectedTarget brainflow::BoardController brainflow::DataHandler brainflow::DSPFilters brainflow::WaveLib brainflow::GanglionLib brainflow::BrainBitLib brainflow::MLModule brainflow::Brainflow)
   list(APPEND _expectedTargets ${_expectedTarget})
   if(NOT TARGET ${_expectedTarget})
     list(APPEND _targetsNotDefined ${_expectedTarget})
@@ -82,6 +82,13 @@ set_target_properties(brainflow::WaveLib PROPERTIES
 add_library(brainflow::GanglionLib SHARED IMPORTED)
 
 set_target_properties(brainflow::GanglionLib PROPERTIES
+  INTERFACE_INCLUDE_DIRECTORIES "${_IMPORT_PREFIX}/inc"
+)
+
+# Create imported target brainflow::BrainBitLib
+add_library(brainflow::BrainBitLib SHARED IMPORTED)
+
+set_target_properties(brainflow::BrainBitLib PROPERTIES
   INTERFACE_INCLUDE_DIRECTORIES "${_IMPORT_PREFIX}/inc"
 )
 

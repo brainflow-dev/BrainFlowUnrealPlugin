@@ -27,6 +27,7 @@ public class BrainFlowPlugin : ModuleRules
             RuntimeDependencies.Add("$(TargetOutputDir)/gforce32.dll", Path.Combine(ModuleDirectory, "Compiled", "Win32_Release_dynamic", "lib", "gforce32.dll"));
             RuntimeDependencies.Add("$(TargetOutputDir)/gForceSDKWrapper32.dll", Path.Combine(ModuleDirectory, "Compiled", "Win32_Release_dynamic", "lib", "gForceSDKWrapper32.dll"));
             RuntimeDependencies.Add("$(TargetOutputDir)/neurosdk-x86.dll", Path.Combine(ModuleDirectory, "Compiled", "Win32_Release_dynamic", "lib", "neurosdk-x86.dll"));
+            RuntimeDependencies.Add("$(TargetOutputDir)/BrainBitLib32.dll", Path.Combine(ModuleDirectory, "Compiled", "Win32_Release_dynamic", "lib", "BrainBitLib32.dll"));
         }
         if(Target.Platform == UnrealTargetPlatform.Win64)
         {
@@ -43,6 +44,7 @@ public class BrainFlowPlugin : ModuleRules
             RuntimeDependencies.Add("$(TargetOutputDir)/gForceSDKWrapper.dll", Path.Combine(ModuleDirectory, "Compiled", "x64_Release_dynamic", "lib", "gForceSDKWrapper32.dll"));
             RuntimeDependencies.Add("$(TargetOutputDir)/neurosdk-x64.dll", Path.Combine(ModuleDirectory, "Compiled", "x64_Release_dynamic", "lib", "neurosdk-x64.dll"));
             RuntimeDependencies.Add("$(TargetOutputDir)/Unicorn.dll", Path.Combine(ModuleDirectory, "Compiled", "x64_Release_dynamic", "lib", "Unicorn.dll"));
+            RuntimeDependencies.Add("$(TargetOutputDir)/BrainBitLib.dll", Path.Combine(ModuleDirectory, "Compiled", "x64_Release_dynamic", "lib", "BrainBitLib.dll"));
         }
         if(Target.Platform == UnrealTargetPlatform.Mac)
         {
@@ -57,6 +59,7 @@ public class BrainFlowPlugin : ModuleRules
             RuntimeDependencies.Add("$(TargetOutputDir)/libGanglionLib.dylib", Path.Combine(ModuleDirectory, "Compiled", "macos_Release", "lib", "libGanglionLib.dylib"));
             RuntimeDependencies.Add("$(TargetOutputDir)/libMLModule.dylib", Path.Combine(ModuleDirectory, "Compiled", "macos_Release", "lib", "libMLModule.dylib"));
             RuntimeDependencies.Add("$(TargetOutputDir)/libneurosdk-shared.dylib", Path.Combine(ModuleDirectory, "Compiled", "macos_Release", "lib", "libneurosdk-shared.dylib"));
+            RuntimeDependencies.Add("$(TargetOutputDir)/libBrainBitLib.dylib", Path.Combine(ModuleDirectory, "Compiled", "macos_Release", "lib", "libBrainBitLib.dylib"));
         }
         if(Target.Platform == UnrealTargetPlatform.Linux)
         {
@@ -71,6 +74,7 @@ public class BrainFlowPlugin : ModuleRules
             RuntimeDependencies.Add("$(TargetOutputDir)/libGanglionLib.so", Path.Combine(ModuleDirectory, "Compiled", "linux_Release", "lib", "libGanglionLib.so"));
             RuntimeDependencies.Add("$(TargetOutputDir)/libMLModule.so", Path.Combine(ModuleDirectory, "Compiled", "linux_Release", "lib", "libMLModule.so"));
             RuntimeDependencies.Add("$(TargetOutputDir)/libunicorn.so", Path.Combine(ModuleDirectory, "Compiled", "linux_Release", "lib", "libunicorn.so"));
+            RuntimeDependencies.Add("$(TargetOutputDir)/libBrainBitLib.so", Path.Combine(ModuleDirectory, "Compiled", "linux_Release", "lib", "libBrainBitLib.so"));
         }
     }
 }

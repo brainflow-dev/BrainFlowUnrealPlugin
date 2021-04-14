@@ -51,9 +51,10 @@ enum class BoardIds : int
     IRONBCI_BOARD = 15,
     GFORCE_PRO_BOARD = 16,
     FREEEEG32_BOARD = 17,
+    BRAINBIT_BLED_BOARD = 18,
     // use it to iterate
     FIRST = PLAYBACK_FILE_BOARD,
-    LAST = FREEEEG32_BOARD
+    LAST = BRAINBIT_BLED_BOARD
 };
 
 enum class FilterTypes : int
@@ -109,4 +110,10 @@ enum class LogLevels : int
     LEVEL_ERROR = 4,    /// ERROR
     LEVEL_CRITICAL = 5, /// CRITICAL
     LEVEL_OFF = 6       // OFF
+};
+
+enum class NoiseTypes : int
+{
+    FIFTY = 0,
+    SIXTY = 1
 };
