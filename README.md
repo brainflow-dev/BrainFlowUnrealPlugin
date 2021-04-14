@@ -14,12 +14,13 @@ By default it links MSVC runtime statically, while Unreal Engine uses dynamic li
 
 * Create Plugins folder in your project(skip it if you already have one)
 * Copy [this folder](https://github.com/brainflow-dev/BrainFlowUnrealPlugin/tree/master/BrainFlowPlugin) to your Plugins folder
+* Refresh your VS solution, in Unreal Engine Player click *File->Refresh Visual Studio Project*
 * Enable BrainFlowPlugin for your project. In *[ProjectName].Build.cs* add smth like `PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "BrainFlowPlugin" });`
 
 **Usage:**
 
 * Add `#include "BrainFlowPlugin.h"`, it includes headers for all BrainFlow modules.
-* Use BrainFlow C++ API as in any other project. Feel free tp check [Docs](https://brainflow.readthedocs.io/en/stable/UserAPI.html#c-api-reference) and [Samples](https://brainflow.readthedocs.io/en/stable/Examples.html#id1) 
+* Use BrainFlow C++ API as in any other project. Feel free to check [Docs](https://brainflow.readthedocs.io/en/stable/UserAPI.html#c-api-reference) and [Samples](https://brainflow.readthedocs.io/en/stable/Examples.html#id1) 
 
 
 It may also work on Linux and MacOS, but we have not tested it so far. Also, for Windows we provide libs only for x86 and x64. ARM is not currently supported.
