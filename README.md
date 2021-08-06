@@ -30,7 +30,7 @@ git submodule update --remote # this will get the latest changes from master bra
 Compile brainflow using:
 ```
 cd brainflow
-python tools/build.py --clear-build-dir --cmake-install-prefix %FULL_PATH_TO_CLONED_FOLDER%/BrainFlowPlugin/Compiled/linux
+python tools/build.py --clear-build-dir --cmake-install-prefix %FULL_PATH_TO_CLONED_FOLDER%/BrainFlowPlugin/Source/BrainFlowPlugin/Compiled/linux
 # to use debug version you need to add --debug flag
 ```
 
@@ -39,7 +39,7 @@ python tools/build.py --clear-build-dir --cmake-install-prefix %FULL_PATH_TO_CLO
 Compile brainflow using:
 ```
 cd brainflow
-python tools/build.py --clear-build-dir --cmake-install-prefix %FULL_PATH_TO_CLONED_FOLDER%/BrainFlowPlugin/Compiled/macos
+python tools/build.py --clear-build-dir --cmake-install-prefix %FULL_PATH_TO_CLONED_FOLDER%/BrainFlowPlugin/Source/BrainFlowPlugin/Compiled/macos
 # to use debug version you need to add --debug flag
 ```
 
