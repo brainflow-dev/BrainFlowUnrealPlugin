@@ -1,0 +1,4 @@
+[submodule "brainflow"]
+	path = brainflow
+	url = https://github.com/brainflow-dev/brainflow
+	branch = master
