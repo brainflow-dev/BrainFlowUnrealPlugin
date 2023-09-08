@@ -43,6 +43,15 @@ python tools/build.py --clear-build-dir --cmake-install-prefix %FULL_PATH_TO_CLO
 # to use debug version you need to add --debug flag
 ```
 
+##### MacOS ARM64
+
+Compile brainflow using:
+```
+cd brainflow
+python tools/build.py --clear-build-dir --cmake-install-prefix %FULL_PATH_TO_CLONED_FOLDER%/BrainFlowPlugin/Source/BrainFlowPlugin/Compiled/macos --cmake-osx-architectures=arm64
+# to use debug version you need to add --debug flag
+```
+
 ##### Win32
 
 Compile brainflow using:
