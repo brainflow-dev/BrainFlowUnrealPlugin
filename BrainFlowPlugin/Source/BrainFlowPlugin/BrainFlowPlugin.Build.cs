@@ -12,7 +12,6 @@ public class BrainFlowPlugin : ModuleRules
         PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore" });
 
         PublicIncludePaths.Add(Path.Combine(ModuleDirectory, "Public"));
-        
 
         if(Target.Platform == UnrealTargetPlatform.Win64)
         {
