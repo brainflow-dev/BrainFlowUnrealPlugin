@@ -18,18 +18,18 @@ public class BrainFlowPlugin : ModuleRules
         {
             PublicIncludePaths.Add(Path.Combine(ModuleDirectory, "Compiled", "x64_dynamic", "inc"));
             
-            string Folder = Path.Combine(ModuleDirectory,  "Compiled", "macos", "lib");
-            PublicAdditionalLibraries.Add(Folder + "Brainflow.lib");
+            string Folder = Path.Combine(ModuleDirectory,  "Compiled", "x64_dynamic", "lib");
+            PublicAdditionalLibraries.Add(Folder + "/Brainflow.lib");
             
-            PublicAdditionalLibraries.Add(Folder + "DataHandler.lib");
-            PublicAdditionalLibraries.Add(Folder + "BoardController.lib");
-            PublicAdditionalLibraries.Add(Folder + "MLModule.lib");
+            PublicAdditionalLibraries.Add(Folder + "/DataHandler.lib");
+            PublicAdditionalLibraries.Add(Folder + "/BoardController.lib");
+            PublicAdditionalLibraries.Add(Folder + "/MLModule.lib");
             
             RuntimeDependencies.Add("$(TargetOutputDir)/BoardController.dll", Path.Combine(ModuleDirectory, "Compiled", "x64_dynamic", "lib", "BoardController.dll"));
             RuntimeDependencies.Add("$(TargetOutputDir)/DataHandler.dll", Path.Combine(ModuleDirectory, "Compiled", "x64_dynamic", "lib", "DataHandler.dll"));
             RuntimeDependencies.Add("$(TargetOutputDir)/GanglionLib.dll", Path.Combine(ModuleDirectory, "Compiled", "x64_dynamic", "lib", "GanglionLib.dll"));
-            RuntimeDependencies.Add("$(TargetOutputDir)/gforce64.dll", Path.Combine(ModuleDirectory, "Compiled", "x64_dynamic", "lib", "gforce64.dll"));
-            RuntimeDependencies.Add("$(TargetOutputDir)/gForceSDKWrapper.dll", Path.Combine(ModuleDirectory, "Compiled", "x64_dynamic", "lib", "gForceSDKWrapper.dll"));
+            //RuntimeDependencies.Add("$(TargetOutputDir)/gforce64.dll", Path.Combine(ModuleDirectory, "Compiled", "x64_dynamic", "lib", "gforce64.dll"));
+            //RuntimeDependencies.Add("$(TargetOutputDir)/gForceSDKWrapper.dll", Path.Combine(ModuleDirectory, "Compiled", "x64_dynamic", "lib", "gForceSDKWrapper.dll"));
             RuntimeDependencies.Add("$(TargetOutputDir)/neurosdk-x64.dll", Path.Combine(ModuleDirectory, "Compiled", "x64_dynamic", "lib", "neurosdk-x64.dll"));
             RuntimeDependencies.Add("$(TargetOutputDir)/Unicorn.dll", Path.Combine(ModuleDirectory, "Compiled", "x64_dynamic", "lib", "Unicorn.dll"));
             RuntimeDependencies.Add("$(TargetOutputDir)/BrainBitLib.dll", Path.Combine(ModuleDirectory, "Compiled", "x64_dynamic", "lib", "BrainBitLib.dll"));
