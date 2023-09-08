@@ -12,24 +12,8 @@ public class BrainFlowPlugin : ModuleRules
         PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore" });
 
         PublicIncludePaths.Add(Path.Combine(ModuleDirectory, "Public"));
+        
 
-        if(Target.Platform == UnrealTargetPlatform.Win32)
-        {
-            PublicIncludePaths.Add(Path.Combine(ModuleDirectory, "Compiled", "Win32_dynamic", "inc"));
-            PublicLibraryPaths.Add(Path.Combine(ModuleDirectory, "Compiled", "Win32_dynamic", "lib"));
-            PublicAdditionalLibraries.Add("Brainflow32.lib");
-            PublicAdditionalLibraries.Add("DataHandler32.lib");
-            PublicAdditionalLibraries.Add("BoardController32.lib");
-            PublicAdditionalLibraries.Add("MLModule32.lib");
-            RuntimeDependencies.Add("$(TargetOutputDir)/BoardController32.dll", Path.Combine(ModuleDirectory, "Compiled", "Win32_dynamic", "lib", "BoardController32.dll"));
-            RuntimeDependencies.Add("$(TargetOutputDir)/DataHandler32.dll", Path.Combine(ModuleDirectory, "Compiled", "Win32_dynamic", "lib", "DataHandler32.dll"));
-            RuntimeDependencies.Add("$(TargetOutputDir)/GanglionLib32.dll", Path.Combine(ModuleDirectory, "Compiled", "Win32_dynamic", "lib", "GanglionLib32.dll"));
-            RuntimeDependencies.Add("$(TargetOutputDir)/gforce32.dll", Path.Combine(ModuleDirectory, "Compiled", "Win32_dynamic", "lib", "gforce32.dll"));
-            RuntimeDependencies.Add("$(TargetOutputDir)/gForceSDKWrapper32.dll", Path.Combine(ModuleDirectory, "Compiled", "Win32_dynamic", "lib", "gForceSDKWrapper32.dll"));
-            RuntimeDependencies.Add("$(TargetOutputDir)/neurosdk-x86.dll", Path.Combine(ModuleDirectory, "Compiled", "Win32_dynamic", "lib", "neurosdk-x86.dll"));
-            RuntimeDependencies.Add("$(TargetOutputDir)/BrainBitLib32.dll", Path.Combine(ModuleDirectory, "Compiled", "Win32_dynamic", "lib", "BrainBitLib32.dll"));
-            RuntimeDependencies.Add("$(TargetOutputDir)/eego-SDK32.dll", Path.Combine(ModuleDirectory, "Compiled", "Win32_dynamic", "lib", "eego-SDK32.dll"));
-        }
         if(Target.Platform == UnrealTargetPlatform.Win64)
         {
             PublicLibraryPaths.Add(Path.Combine(ModuleDirectory, "Compiled", "x64_dynamic", "lib"));
