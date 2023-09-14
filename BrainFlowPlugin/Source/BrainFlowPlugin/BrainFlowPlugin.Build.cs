@@ -14,48 +14,48 @@ public class BrainFlowPlugin : ModuleRules
 
         PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore" });
 
-        PublicIncludePaths.Add(Path.Combine(ModuleDirectory, "Public"));
-
         if(Target.Platform == UnrealTargetPlatform.Win64)
         {
+            String PrecompiledFolder = Path.Combine(ModuleDirectory, "Compiled", "x64_dynamic", "lib");
             PublicIncludePaths.Add(Path.Combine(ModuleDirectory, "Compiled", "x64_dynamic", "inc"));
-            
-            AddPrecompiledLibraries(Path.Combine(ModuleDirectory,  "Compiled", "x64_dynamic", "lib"), "*.lib");
-            AddPrecompiledDLLs(Path.Combine(ModuleDirectory,  "Compiled", "x64_dynamic", "lib"), "*.dll");
+            PublicAdditionalLibraries.Add(Path.Combine(PrecompiledFolder, "Brainflow.lib"));
+            PublicDelayLoadDLLs.Add(Path.Combine(PrecompiledFolder, "BoardController.dll"));
+            PublicDelayLoadDLLs.Add(Path.Combine(PrecompiledFolder, "DataHandler.dll"));
+            PublicDelayLoadDLLs.Add(Path.Combine(PrecompiledFolder, "MLModule.dll"));
+ 
+            AddRuntimeDependencies(PrecompiledFolder, "*.dll");
         }
         if(Target.Platform == UnrealTargetPlatform.Mac)
         {
+            String PrecompiledFolder = Path.Combine(ModuleDirectory, "Compiled", "macos", "lib");
             PublicIncludePaths.Add(Path.Combine(ModuleDirectory, "Compiled", "macos", "inc"));
-            
-            AddPrecompiledLibraries(Path.Combine(ModuleDirectory, "Compiled", "macos", "lib"), "*.a");
-            AddPrecompiledDLLs(Path.Combine(ModuleDirectory, "Compiled", "macos", "lib"), "*.dylib");
+            PublicAdditionalLibraries.Add(Path.Combine(PrecompiledFolder, "libBrainflow.a"));
+            PublicDelayLoadDLLs.Add(Path.Combine(PrecompiledFolder, "libBoardController.dylib"));
+            PublicDelayLoadDLLs.Add(Path.Combine(PrecompiledFolder, "libDataHandler.dylib"));
+            PublicDelayLoadDLLs.Add(Path.Combine(PrecompiledFolder, "libMLModule.dylib"));
+
+            AddRuntimeDependencies(PrecompiledFolder, "*.dylib");
         }
         if(Target.Platform == UnrealTargetPlatform.Linux)
         {
+            String PrecompiledFolder = Path.Combine(ModuleDirectory, "Compiled", "linux", "lib");
             PublicIncludePaths.Add(Path.Combine(ModuleDirectory, "Compiled", "linux", "inc"));
-            
-            AddPrecompiledLibraries(Path.Combine(ModuleDirectory,  "Compiled", "linux", "lib"), "*.a");
-            AddPrecompiledDLLs(Path.Combine(ModuleDirectory,  "Compiled", "linux", "lib"), "*.so");
+            PublicAdditionalLibraries.Add(Path.Combine(PrecompiledFolder, "libBrainflow.a"));
+            PublicDelayLoadDLLs.Add(Path.Combine(PrecompiledFolder, "libBoardController.so"));
+            PublicDelayLoadDLLs.Add(Path.Combine(PrecompiledFolder, "libDataHandler.so"));
+            PublicDelayLoadDLLs.Add(Path.Combine(PrecompiledFolder, "libMLModule.so"));
+ 
+            AddRuntimeDependencies(PrecompiledFolder, "*.so");
         }
     }
     
-    public void AddPrecompiledLibraries(string FolderPath, string Extension)
+    public void AddRuntimeDependencies(string FolderPath, string Extension)
     {
         List<string> Files = Directory.GetFiles(FolderPath, Extension, SearchOption.AllDirectories).ToList();
         foreach (string File in Files)
         {
-            PublicAdditionalLibraries.Add(Path.Combine(FolderPath, File));
-            Console.WriteLine(Name + " adding library: " + File);
-        }
-    }
-
-    public void AddPrecompiledDLLs(string FolderPath, string Extension)
-    {
-        List<string> Files = Directory.GetFiles(FolderPath, Extension, SearchOption.AllDirectories).ToList();
-        foreach (string File in Files)
-        {
-            PublicDelayLoadDLLs.Add(Path.Combine(FolderPath, File));
-            Console.WriteLine(Name + " adding DLL: " + File);
+            RuntimeDependencies.Add(Path.Combine(FolderPath, File));
+            Console.WriteLine(Name + "adding runtime dependency:" + File);
         }
     }
 }
