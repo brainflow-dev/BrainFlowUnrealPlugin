@@ -2,6 +2,8 @@
 
 #include <Interfaces/IPluginManager.h>
 
+#define RUN_EXAMPLE 1
+
 #ifdef RUN_EXAMPLE
 #include <iostream>
 #include <stdlib.h>
@@ -20,7 +22,7 @@ void UEPrint(const T& In)
 	std::string dataString = ss.str();
 
 	// Unreal's UE_LOG stops at the first '/n', so we are going to remove them from the string so we can see the full message
-	dataString.erase(std::remove(dataString.begin(), dataString.end(), '\n'), dataString.cend());
+	std::erase(dataString, '\n');
 
 	const FString StringMessage = UTF8_TO_TCHAR(dataString.c_str());
 
@@ -38,7 +40,7 @@ int RunExample()
 
 	struct BrainFlowInputParams params;
 	int res = 0;
-	int board_id = (int)BoardIds::SYNTHETIC_BOARD;
+	int board_id = static_cast<int>(BoardIds::SYNTHETIC_BOARD);
 	// use synthetic board for demo
 	BoardShim *board = new BoardShim (board_id, params);
 
@@ -54,7 +56,7 @@ int RunExample()
 	UEPrint(data);
 
 	// apply filters
-	int sampling_rate = BoardShim::get_sampling_rate ((int)BoardIds::SYNTHETIC_BOARD);
+	int sampling_rate = BoardShim::get_sampling_rate (static_cast<int>(BoardIds::SYNTHETIC_BOARD));
 	std::vector<int> eeg_channels = BoardShim::get_eeg_channels (board_id);
 	for (int i = 0; i < eeg_channels.size (); i++)
 	{
@@ -65,27 +67,27 @@ int RunExample()
 			case 0:
 				DataFilter::perform_lowpass (data.get_address (eeg_channels[i]),
 					data.get_size (1), BoardShim::get_sampling_rate (board_id), 50.0, 3,
-					(int)FilterTypes::BUTTERWORTH_ZERO_PHASE, 0);
+					static_cast<int>(FilterTypes::BUTTERWORTH_ZERO_PHASE), 0);
 				break;
 			case 1:
 				DataFilter::perform_highpass (data.get_address (eeg_channels[i]),
 					data.get_size (1), BoardShim::get_sampling_rate (board_id), 3.0, 5,
-					(int)FilterTypes::CHEBYSHEV_TYPE_1_ZERO_PHASE, 1);
+					static_cast<int>(FilterTypes::CHEBYSHEV_TYPE_1_ZERO_PHASE), 1);
 				break;
 			case 2:
 				DataFilter::perform_bandpass (data.get_address (eeg_channels[i]),
 					data.get_size (1), BoardShim::get_sampling_rate (board_id), 3.0, 45.0, 3,
-					(int)FilterTypes::BESSEL_ZERO_PHASE, 0);
+					static_cast<int>(FilterTypes::BESSEL_ZERO_PHASE), 0);
 				break;
 			case 3:
 				DataFilter::perform_bandstop (data.get_address (eeg_channels[i]),
 					data.get_size (1), BoardShim::get_sampling_rate (board_id), 48.0, 62.0, 4,
-					(int)FilterTypes::BUTTERWORTH, 0);
+					static_cast<int>(FilterTypes::BUTTERWORTH), 0);
 				break;
 			default:
 				DataFilter::remove_environmental_noise (data.get_address (eeg_channels[i]),
 					data.get_size (1), BoardShim::get_sampling_rate (board_id),
-					(int)NoiseTypes::FIFTY);
+					static_cast<int>(NoiseTypes::FIFTY));
 				break;
 		}
 	}

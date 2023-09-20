@@ -35,9 +35,9 @@ public class BrainFlowPlugin : ModuleRules
 
             PublicAdditionalLibraries.Add(Path.Combine(PrecompiledFolder, "libBrainflow.a"));
 
-            PublicDelayLoadDLLs.Add("libBoardController.dylib");
-            PublicDelayLoadDLLs.Add("libDataHandler.dylib");
-            PublicDelayLoadDLLs.Add("libMLModule.dylib");
+            PublicDelayLoadDLLs.Add(Path.Combine(PrecompiledFolder, "libBoardController.dylib"));
+            PublicDelayLoadDLLs.Add(Path.Combine(PrecompiledFolder, "libDataHandler.dylib"));
+            PublicDelayLoadDLLs.Add(Path.Combine(PrecompiledFolder, "libMLModule.dylib"));
 
             AddRuntimeDependencies(PrecompiledFolder, "*.dylib");
         }
