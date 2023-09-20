@@ -1,5 +1,3 @@
-// Copyright 1998-2019 Epic Games, Inc. All Rights Reserved.
-
 using System;
 using System.Collections.Generic;
 using UnrealBuildTool;
@@ -12,27 +10,34 @@ public class BrainFlowPlugin : ModuleRules
     {
         PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 
-        PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore" });
+        PublicDependencyModuleNames.AddRange(new string[] { "Core", "Projects" });
 
         if(Target.Platform == UnrealTargetPlatform.Win64)
         {
             String PrecompiledFolder = Path.Combine(ModuleDirectory, "Compiled", "x64_dynamic", "lib");
             PublicIncludePaths.Add(Path.Combine(ModuleDirectory, "Compiled", "x64_dynamic", "inc"));
+
             PublicAdditionalLibraries.Add(Path.Combine(PrecompiledFolder, "Brainflow.lib"));
-            PublicDelayLoadDLLs.Add(Path.Combine(PrecompiledFolder, "BoardController.dll"));
-            PublicDelayLoadDLLs.Add(Path.Combine(PrecompiledFolder, "DataHandler.dll"));
-            PublicDelayLoadDLLs.Add(Path.Combine(PrecompiledFolder, "MLModule.dll"));
- 
+            PublicAdditionalLibraries.Add(Path.Combine(PrecompiledFolder, "DataHandler.lib"));
+            PublicAdditionalLibraries.Add(Path.Combine(PrecompiledFolder, "BoardController.lib"));
+            PublicAdditionalLibraries.Add(Path.Combine(PrecompiledFolder, "MLModule.lib"));
+
+            PublicDelayLoadDLLs.Add("BoardController.dll");
+            PublicDelayLoadDLLs.Add("DataHandler.dll");
+            PublicDelayLoadDLLs.Add("MLModule.dll");
+
             AddRuntimeDependencies(PrecompiledFolder, "*.dll");
         }
         if(Target.Platform == UnrealTargetPlatform.Mac)
         {
             String PrecompiledFolder = Path.Combine(ModuleDirectory, "Compiled", "macos", "lib");
             PublicIncludePaths.Add(Path.Combine(ModuleDirectory, "Compiled", "macos", "inc"));
+
             PublicAdditionalLibraries.Add(Path.Combine(PrecompiledFolder, "libBrainflow.a"));
-            PublicDelayLoadDLLs.Add(Path.Combine(PrecompiledFolder, "libBoardController.dylib"));
-            PublicDelayLoadDLLs.Add(Path.Combine(PrecompiledFolder, "libDataHandler.dylib"));
-            PublicDelayLoadDLLs.Add(Path.Combine(PrecompiledFolder, "libMLModule.dylib"));
+
+            PublicDelayLoadDLLs.Add("libBoardController.dylib");
+            PublicDelayLoadDLLs.Add("libDataHandler.dylib");
+            PublicDelayLoadDLLs.Add("libMLModule.dylib");
 
             AddRuntimeDependencies(PrecompiledFolder, "*.dylib");
         }
@@ -40,11 +45,13 @@ public class BrainFlowPlugin : ModuleRules
         {
             String PrecompiledFolder = Path.Combine(ModuleDirectory, "Compiled", "linux", "lib");
             PublicIncludePaths.Add(Path.Combine(ModuleDirectory, "Compiled", "linux", "inc"));
+
             PublicAdditionalLibraries.Add(Path.Combine(PrecompiledFolder, "libBrainflow.a"));
-            PublicDelayLoadDLLs.Add(Path.Combine(PrecompiledFolder, "libBoardController.so"));
-            PublicDelayLoadDLLs.Add(Path.Combine(PrecompiledFolder, "libDataHandler.so"));
-            PublicDelayLoadDLLs.Add(Path.Combine(PrecompiledFolder, "libMLModule.so"));
- 
+
+            PublicDelayLoadDLLs.Add("libBoardController.so");
+            PublicDelayLoadDLLs.Add("libDataHandler.so");
+            PublicDelayLoadDLLs.Add("libMLModule.so");
+
             AddRuntimeDependencies(PrecompiledFolder, "*.so");
         }
     }
